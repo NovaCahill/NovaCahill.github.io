@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HERE - an evolving collection of volumes and chapters.">
+  <title>HERE</title>
+  <style>
+    :root {
+      --navy: #071d49;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--navy);
+      background: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: stretch;
+      min-height: 76px;
+      border-bottom: 2px solid var(--navy);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      width: 42%;
+      padding: 0 4vw;
+      color: var(--white);
+      background: var(--navy);
+      font-size: clamp(1.4rem, 2.6vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: 0.3em;
+      text-decoration: none;
+    }
+
+    .main-nav {
+      display: flex;
+      flex: 1;
+    }
+
+    .main-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      border-left: 2px solid var(--navy);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      color: var(--white);
+      background: var(--navy);
+      outline: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.45fr);
+      min-height: calc(100vh - 76px);
+      border-bottom: 2px solid var(--navy);
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 660px;
+      padding: clamp(2rem, 6vw, 6rem) 4vw 3rem;
+    }
+
+    .eyebrow,
+    .section-kicker,
+    .meta-label {
+      margin: 0;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.23em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 42rem;
+      margin: 3rem 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.35rem, 2.8vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .intro {
+      max-width: 38rem;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 2.3vw, 2.15rem);
+      line-height: 1.25;
+    }
+
+    .scroll-mark {
+      flex: none;
+      width: 88px;
+      height: 88px;
+      padding: 10px;
+      border: 2px solid var(--navy);
+      border-radius: 50%;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      line-height: 64px;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 180ms ease, color 180ms ease, background 180ms ease;
+    }
+
+    .scroll-mark:hover,
+    .scroll-mark:focus-visible {
+      color: var(--white);
+      background: var(--navy);
+      outline: none;
+      transform: rotate(-8deg);
+    }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1fr;
+      border-left: 2px solid var(--navy);
+    }
+
+    .side-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem;
+      text-decoration: none;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .side-card + .side-card {
+      border-top: 2px solid var(--navy);
+    }
+
+    .side-card:hover,
+    .side-card:focus-visible {
+      color: var(--white);
+      background: var(--navy);
+      outline: none;
+    }
+
+    .side-number {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4rem, 9vw, 8rem);
+      line-height: 1;
+    }
+
+    .side-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .collection {
+      padding: clamp(4rem, 8vw, 8rem) 4vw;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      margin: 0.1em 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4rem, 11vw, 9rem);
+      font-weight: 400;
+      letter-spacing: -0.07em;
+      line-height: 0.9;
+    }
+
+    .section-note {
+      max-width: 25rem;
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+
+    .volume-list {
+      border-top: 2px solid var(--navy);
+    }
+
+    .volume {
+      display: grid;
+      grid-template-columns: 0.45fr 1.3fr 0.65fr;
+      align-items: center;
+      min-height: 150px;
+      border-bottom: 2px solid var(--navy);
+      text-decoration: none;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .volume:hover,
+    .volume:focus-visible {
+      color: var(--white);
+      background: var(--navy);
+      outline: none;
+    }
+
+    .volume > span {
+      padding: 1.5rem;
+    }
+
+    .volume > span + span {
+      border-left: 2px solid var(--navy);
+    }
+
+    .volume:hover > span + span,
+    .volume:focus-visible > span + span {
+      border-left-color: var(--white);
+    }
+
+    .volume-number {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: 1;
+    }
+
+    .volume-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.6rem, 3vw, 3rem);
+    }
+
+    .volume-meta {
+      display: flex;
+      align-self: stretch;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .chapters {
+      padding: clamp(4rem, 8vw, 8rem) 4vw;
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 3rem;
+      border-top: 2px solid var(--white);
+      border-left: 2px solid var(--white);
+    }
+
+    .chapter {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 270px;
+      padding: 1.6rem;
+      border-right: 2px solid var(--white);
+      border-bottom: 2px solid var(--white);
+      text-decoration: none;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .chapter:hover,
+    .chapter:focus-visible {
+      color: var(--navy);
+      background: var(--white);
+      outline: none;
+    }
+
+    .chapter-index {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 4rem;
+      line-height: 1;
+    }
+
+    .chapter h3 {
+      margin: 0 0 0.5rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+    }
+
+    .chapter p {
+      margin: 0;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 2rem 4vw;
+      border-top: 2px solid var(--navy);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 800px) {
+      .site-header {
+        min-height: 64px;
+      }
+
+      .brand {
+        width: auto;
+        flex: 1;
+      }
+
+      .main-nav a {
+        padding: 0 1rem;
+        font-size: 0.6rem;
+      }
+
+      .hero {
+        display: block;
+        min-height: auto;
+      }
+
+      .hero-main {
+        min-height: 600px;
+      }
+
+      .hero-side {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        border-top: 2px solid var(--navy);
+        border-left: 0;
+      }
+
+      .side-card {
+        min-height: 250px;
+      }
+
+      .side-card + .side-card {
+        border-top: 0;
+        border-left: 2px solid var(--navy);
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 1.5rem;
+      }
+
+      .volume {
+        grid-template-columns: 0.4fr 1fr;
+      }
+
+      .volume-meta {
+        grid-column: 1 / -1;
+        border-top: 2px solid var(--navy);
+        border-left: 0 !important;
+      }
+
+      .volume:hover .volume-meta,
+      .volume:focus-visible .volume-meta {
+        border-top-color: var(--white);
+      }
+
+      .chapter-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .main-nav a {
+        padding: 0 0.55rem;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-main {
+        min-height: 520px;
+      }
+
+      .hero-bottom {
+        display: block;
+      }
+
+      .scroll-mark {
+        display: block;
+        margin-top: 2rem;
+      }
+
+      .hero-side {
+        display: block;
+      }
+
+      .side-card + .side-card {
+        border-top: 2px solid var(--navy);
+        border-left: 0;
+      }
+
+      .volume {
+        display: block;
+      }
+
+      .volume > span {
+        display: flex;
+      }
+
+      .volume > span + span {
+        border-top: 2px solid var(--navy);
+        border-left: 0;
+      }
+
+      .volume:hover > span + span,
+      .volume:focus-visible > span + span {
+        border-top-color: var(--white);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="HERE home">HERE</a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="#volumes">Volume</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-text">
+      <div class="hero-main">
+        <div>
+          <p class="eyebrow">An evolving collection &middot; Est. 2026</p>
+          <!-- Replace the text below with your own introduction. -->
+          <p class="hero-copy" id="hero-text">Write a short introduction, note, or statement here.</p>
+        </div>
+        <div class="hero-bottom">
+          <p class="intro">A place for writing, research, and ideas worth returning to.</p>
+          <a class="scroll-mark" href="#volumes">Explore &darr;</a>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="Collection summary">
+        <a class="side-card" href="#volumes">
+          <span class="side-number">04</span>
+          <span class="side-title">Volumes <span>&searr;</span></span>
+        </a>
+      </aside>
+    </section>
+
+    <section class="collection" id="volumes" aria-labelledby="volumes-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">The collection</p>
+          <h2 id="volumes-title">Volumes</h2>
+        </div>
+        <p class="section-note">Choose a volume to enter its chapter index. Each chapter can later link directly to an uploaded PDF.</p>
+      </div>
+
+      <div class="volume-list">
+        <a class="volume" href="chapter1.html">
+          <span class="volume-number">00</span>
+          <span class="volume-name"> Foundations </span>
+          <span class="volume-meta"><span>2 Chapters</span><span>Open &nearr;</span></span>
+        </a>
+        <a class="volume" href="chapter2.html">
+          <span class="volume-number">01</span>
+          <span class="volume-name">Observations</span>
+          <span class="volume-meta"><span>2 Chapters</span><span>Open &nearr;</span></span>
+        </a>
+        <a class="volume" href="chapter3.html">
+          <span class="volume-number">02</span>
+          <span class="volume-name">Possibilities</span>
+          <span class="volume-meta"><span>2 Chapters</span><span>Open &nearr;</span></span>
+        </a>
+        <a class="volume" href="chapter4.html">
+          <span class="volume-number">03</span>
+          <span class="volume-name">New Volume Name</span>
+          <span class="volume-meta"><span>3 Chapters</span><span>Open &nearr;</span></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>HERE &middot; 2026</span>
+    <a href="#top">Back to top &uarr;</a>
+  </footer>
+</body>
+</html>
